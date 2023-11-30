@@ -22,19 +22,20 @@ Begin["`Private`"];
 (*Definitions*)
 
 
-f_[Coidentity] ^:= f;
+(f : Except[_Function])[Coidentity] /; ! Developer`SymbolQ[Unevaluated[f]] || ! MemberQ[Attributes[f], HoldFirst | HoldAll] ^:= f
+
+(f : Verbatim[Function][_, _, attrs___])[Coidentity] /; ! MemberQ[Flatten[{attrs}], HoldFirst | HoldAll] ^:= f
 
 
-SetAttributes[Cocomposition, {Flat, OneIdentity}];
+
+SetAttributes[Cocomposition, {Flat, OneIdentity}]
+
+(f : Except[_Function])[Cocomposition[args___]] /; ! Developer`SymbolQ[Unevaluated[f]] || ! MemberQ[Attributes[f], HoldFirst | HoldAll] ^:=
+    Fold[Construct, Prepend[f] @ Reverse[Hold[args]]]
 
 
-f_[Cocomposition[x_, y_]] ^:= f[y][x];
+Cocomposition[left___, Coidentity, right___] := Cocomposition[left, right]
 
-
-Cocomposition[Coidentity, y_] := Cocomposition[y];
-
-
-Cocomposition[x_, Coidentity] := Cocomposition[x];
 
 
 (* ::Section::Closed:: *)

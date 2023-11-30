@@ -7,7 +7,7 @@ PacletObject[
     "Creator" -> "Ian Ford <ianf@wolfram.com>, Nikolay Murzin <nikm@wolfram.com>",
     "License" -> "MIT",
     "PublisherID" -> "Wolfram",
-    "Version" -> "1.0.1",
+    "Version" -> "1.0.2",
     "WolframVersion" -> "13.3+",
     "PrimaryContext" -> "Wolfram`ArgumentTools`",
     "Extensions" -> {
