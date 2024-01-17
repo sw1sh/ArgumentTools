@@ -7,7 +7,7 @@ PacletObject[
     "Creator" -> "Ian Ford <ianf@wolfram.com>, Nikolay Murzin <nikm@wolfram.com>",
     "License" -> "MIT",
     "PublisherID" -> "Wolfram",
-    "Version" -> "1.0.2",
+    "Version" -> "1.0.3",
     "WolframVersion" -> "13.3+",
     "PrimaryContext" -> "Wolfram`ArgumentTools`",
     "Extensions" -> {
@@ -17,7 +17,8 @@ PacletObject[
         "Context" -> {"Wolfram`ArgumentTools`"},
         "Symbols" -> {
           "Wolfram`ArgumentTools`Cocomposition",
-          "Wolfram`ArgumentTools`Coidentity"
+          "Wolfram`ArgumentTools`Coidentity",
+          "Wolfram`ArgumentTools`Held"
         }
       },
       {
