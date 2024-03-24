@@ -26,11 +26,13 @@ Begin["`Private`"];
 
 (f_Symbol)[Coidentity] /; Developer`SymbolQ[f] && FreeQ[Attributes[f], HoldFirst | HoldAll] ^:= f
 
+(f : HoldPattern[Function[_]])[Coidentity] ^:= f
+
 (f : HoldPattern[Function[_, _]])[Coidentity] ^:= f
 
 (f : HoldPattern[Function[_, _, attrs_]])[Coidentity] /; FreeQ[attrs, HoldFirst | HoldAll] ^:= f
 
-(f : Except[_Function])[Coidentity] /; ! Developer`SymbolQ[f] ^:= f
+(f : Except[_Function])[Coidentity] ^:= f
 
 
 (* ::Section:: *)
@@ -41,7 +43,13 @@ SetAttributes[Cocomposition, {Flat, OneIdentity}]
 
 (f_Symbol)[Cocomposition[x_, y_]] /; Developer`SymbolQ[f] && FreeQ[Attributes[f], HoldFirst | HoldAll] ^:= f[y][x]
 
-(f : Except[_Function])[Cocomposition[x_, y_]] /; ! Developer`SymbolQ[f] ^:= f[y][x]
+(f : HoldPattern[Function[_]])[Cocomposition[x_, y_]] ^:= f[y][x]
+
+(f : HoldPattern[Function[_, _]])[Cocomposition[x_, y_]] ^:= f[y][x]
+
+(f : HoldPattern[Function[_, _, attrs_]])[Cocomposition[x_, y_]] /; FreeQ[attrs, HoldFirst | HoldAll] ^:= f[y][x]
+
+(f : Except[_Function])[Cocomposition[x_, y_]] ^:= f[y][x]
 
 Cocomposition[Coidentity, y_] := Cocomposition[y]
 
@@ -56,7 +64,13 @@ SetAttributes[RightCocomposition, {Flat, OneIdentity}]
 
 (f_Symbol)[RightCocomposition[x_, y_]] /; Developer`SymbolQ[f] && FreeQ[Attributes[f], HoldFirst | HoldAll] ^:= f[x][y]
 
-(f : Except[_Function])[RightCocomposition[x_, y_]] /; ! Developer`SymbolQ[f] ^:= f[x][y]
+(f : HoldPattern[Function[_]])[RightCocomposition[x_, y_]] ^:= f[x][y]
+
+(f : HoldPattern[Function[_, _]])[RightCocomposition[x_, y_]] ^:= f[x][y]
+
+(f : HoldPattern[Function[_, _, attrs_]])[RightCocomposition[x_, y_]] /; FreeQ[attrs, HoldFirst | HoldAll] ^:= f[x][y]
+
+(f : Except[_Function])[RightCocomposition[x_, y_]] ^:= f[x][y]
 
 RightCocomposition[Coidentity, y_] := RightCocomposition[y]
 
