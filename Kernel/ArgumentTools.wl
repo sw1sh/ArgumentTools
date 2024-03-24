@@ -20,13 +20,16 @@ Begin["`Private`"];
 
 
 (* ::Section:: *)
-(*Definitions*)
+(*Coidentity*)
 
 
 (f : Except[_Function])[Coidentity] /; ! Developer`SymbolQ[Unevaluated[f]] || ! MemberQ[Attributes[f], HoldFirst | HoldAll] ^:= f
 
 (f : Verbatim[Function][_, _, attrs___])[Coidentity] /; ! MemberQ[Flatten[{attrs}], HoldFirst | HoldAll] ^:= f
 
+
+(* ::Section:: *)
+(*Cocomposition*)
 
 
 SetAttributes[Cocomposition, {Flat, OneIdentity}]
@@ -37,6 +40,9 @@ SetAttributes[Cocomposition, {Flat, OneIdentity}]
 
 Cocomposition[left___, Coidentity, right___] := Cocomposition[left, right]
 
+
+(* ::Section:: *)
+(*Held*)
 
 
 HoldRangeFromAttributes[attrs_, len_] :=
@@ -69,6 +75,7 @@ Held /: expr : head_[left___, Held[mid_], right___] := With[{
 		If[holdRange[[1]] > 1, ;; holdRange[[1]] - 1, holdRange[[2]] + 1 ;;]
 	]
 ]
+
 
 (* ::Section::Closed:: *)
 (*Package Footer*)
