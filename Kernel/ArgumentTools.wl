@@ -23,9 +23,13 @@ Begin["`Private`"];
 (*Coidentity*)
 
 
-(f : Except[_Function])[Coidentity] /; ! Developer`SymbolQ[Unevaluated[f]] || ! MemberQ[Attributes[f], HoldFirst | HoldAll] ^:= f
+(f_Symbol)[Coidentity] /; Developer`SymbolQ[f] && FreeQ[Attributes[f], HoldFirst | HoldAll] ^:= f
 
-(f : Verbatim[Function][_, _, attrs___])[Coidentity] /; ! MemberQ[Flatten[{attrs}], HoldFirst | HoldAll] ^:= f
+(f : HoldPattern[Function[_, _]])[Coidentity] ^:= f
+
+(f : HoldPattern[Function[_, _, attrs_]])[Coidentity] /; FreeQ[attrs, HoldFirst | HoldAll] ^:= f
+
+(f : Except[_Function])[Coidentity] /; ! Developer`SymbolQ[f] ^:= f
 
 
 (* ::Section:: *)
