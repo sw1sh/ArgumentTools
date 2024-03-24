@@ -17,6 +17,7 @@ PacletObject[
         "Context" -> {"Wolfram`ArgumentTools`"},
         "Symbols" -> {
           "Wolfram`ArgumentTools`Cocomposition",
+          "Wolfram`ArgumentTools`RightCocomposition",
           "Wolfram`ArgumentTools`Coidentity",
           "Wolfram`ArgumentTools`Held"
         }

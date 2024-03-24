@@ -13,6 +13,7 @@ BeginPackage["Wolfram`ArgumentTools`"];
 
 Coidentity
 Cocomposition
+RightCocomposition
 Held
 
 
@@ -45,6 +46,21 @@ SetAttributes[Cocomposition, {Flat, OneIdentity}]
 Cocomposition[Coidentity, y_] := Cocomposition[y]
 
 Cocomposition[x_, Coidentity] := Cocomposition[x]
+
+
+(* ::Section:: *)
+(*RightCocomposition*)
+
+
+SetAttributes[RightCocomposition, {Flat, OneIdentity}]
+
+(f_Symbol)[RightCocomposition[x_, y_]] /; Developer`SymbolQ[f] && FreeQ[Attributes[f], HoldFirst | HoldAll] ^:= f[x][y]
+
+(f : Except[_Function])[RightCocomposition[x_, y_]] /; ! Developer`SymbolQ[f] ^:= f[x][y]
+
+RightCocomposition[Coidentity, y_] := RightCocomposition[y]
+
+RightCocomposition[x_, Coidentity] := RightCocomposition[x]
 
 
 (* ::Section:: *)
