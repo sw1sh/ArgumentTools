@@ -39,7 +39,7 @@ Begin["`Private`"];
 (*Cocomposition*)
 
 
-SetAttributes[Cocomposition, {Flat, OneIdentity}]
+SetAttributes[Cocomposition, {Flat, OneIdentity, SequenceHold}]
 
 (f_Symbol)[Cocomposition[x_, y_]] /; Developer`SymbolQ[f] && FreeQ[Attributes[f], HoldFirst | HoldAll] ^:= f[y][x]
 
@@ -65,7 +65,7 @@ Verbatim[Cocomposition][] := Coidentity
 (*RightCocomposition*)
 
 
-SetAttributes[RightCocomposition, {Flat, OneIdentity}]
+SetAttributes[RightCocomposition, {Flat, OneIdentity, SequenceHold}]
 
 (f_Symbol)[RightCocomposition[x_, y_]] /; Developer`SymbolQ[f] && FreeQ[Attributes[f], HoldFirst | HoldAll] ^:= f[x][y]
 
