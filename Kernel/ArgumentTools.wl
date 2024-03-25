@@ -55,6 +55,11 @@ Cocomposition[Coidentity, y_] := Cocomposition[y]
 
 Cocomposition[x_, Coidentity] := Cocomposition[x]
 
+(* Use Verbatim to prevent infinite recursion due to the Flat attribute *)
+Verbatim[Cocomposition][x_] := x
+
+Verbatim[Cocomposition][] := Coidentity
+
 
 (* ::Section:: *)
 (*RightCocomposition*)
@@ -75,6 +80,11 @@ SetAttributes[RightCocomposition, {Flat, OneIdentity}]
 RightCocomposition[Coidentity, y_] := RightCocomposition[y]
 
 RightCocomposition[x_, Coidentity] := RightCocomposition[x]
+
+(* Use Verbatim to prevent infinite recursion due to the Flat attribute *)
+Verbatim[RightCocomposition][x_] := x
+
+Verbatim[RightCocomposition][] := Coidentity
 
 
 (* ::Section:: *)
