@@ -12,6 +12,7 @@ BeginPackage["Wolfram`ArgumentTools`"];
 
 
 Coidentity
+Cozero
 Cocomposition
 RightCocomposition
 Held
@@ -33,6 +34,21 @@ Begin["`Private`"];
 (f : HoldPattern[Function[_, _, attrs_]])[Coidentity] /; FreeQ[attrs, HoldFirst | HoldAll] ^:= f
 
 (f : Except[_Function])[Coidentity] /; ! Developer`SymbolQ[f] ^:= f
+
+
+(* ::Section:: *)
+(*Cozero*)
+
+
+(f_Symbol)[Cozero] /; Developer`SymbolQ[f] && FreeQ[Attributes[f], HoldFirst | HoldAll] ^:= Cozero
+
+(f : HoldPattern[Function[_]])[Cozero] ^:= Cozero
+
+(f : HoldPattern[Function[_, _]])[Cozero] ^:= Cozero
+
+(f : HoldPattern[Function[_, _, attrs_]])[Cozero] /; FreeQ[attrs, HoldFirst | HoldAll] ^:= Cozero
+
+(f : Except[_Function])[Cozero] /; ! Developer`SymbolQ[f] ^:= Cozero
 
 
 (* ::Section:: *)

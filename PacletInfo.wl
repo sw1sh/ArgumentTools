@@ -19,6 +19,7 @@ PacletObject[
           "Wolfram`ArgumentTools`Cocomposition",
           "Wolfram`ArgumentTools`RightCocomposition",
           "Wolfram`ArgumentTools`Coidentity",
+          "Wolfram`ArgumentTools`Cozero",
           "Wolfram`ArgumentTools`Held"
         }
       },
