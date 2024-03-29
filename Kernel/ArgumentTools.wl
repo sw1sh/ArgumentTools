@@ -15,6 +15,7 @@ Coidentity
 Cozero
 Cocomposition
 RightCocomposition
+SequenceCompose
 Held
 
 
@@ -101,6 +102,13 @@ RightCocomposition[x_, Coidentity] := RightCocomposition[x]
 Verbatim[RightCocomposition][x_] := x
 
 Verbatim[RightCocomposition][] := Coidentity
+
+
+(*SequenceCompose*)
+
+SequenceCompose[fs___][xs___] := With[{length = Max[Length[{fs}], Length[{xs}]]}, 
+    Sequence @@ MapThread[Construct, {PadRight[{fs}, length, Identity], PadRight[{xs}, length, Coidentity]}]
+]
 
 
 (* ::Section:: *)
