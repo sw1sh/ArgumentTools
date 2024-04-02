@@ -18,7 +18,7 @@ PacletObject[
         "Symbols" -> {
           "Wolfram`ArgumentTools`Cocomposition",
           "Wolfram`ArgumentTools`RightCocomposition",
-          "Wolfram`ArugmentTools`SequenceCompose",
+          "Wolfram`ArgumentTools`SequenceCompose",
           "Wolfram`ArgumentTools`Coidentity",
           "Wolfram`ArgumentTools`Cozero",
           "Wolfram`ArgumentTools`Held"
