@@ -104,11 +104,19 @@ Verbatim[RightCocomposition][x_] := x
 Verbatim[RightCocomposition][] := Coidentity
 
 
+(* ::Section:: *)
 (*SequenceCompose*)
 
-SequenceCompose[fs___][xs___] := With[{length = Max[Length[{fs}], Length[{xs}]]}, 
-    Sequence @@ MapThread[Construct, {PadRight[{fs}, length, Identity], PadRight[{xs}, length, Coidentity]}]
-]
+
+(* Coidentity at the end should have no effect, but don't want it
+   to disappear prematurely in the recursive definition below. *)
+SequenceCompose[fs___][xs__, Coidentity] := SequenceCompose[fs][xs]
+
+SequenceCompose[f_, fs___][x_, xs___] := Sequence[f[x], SequenceCompose[fs][xs]]
+
+SequenceCompose[fs__][] := fs
+
+SequenceCompose[][xs___] := xs
 
 
 (* ::Section:: *)
