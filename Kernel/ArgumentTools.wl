@@ -15,7 +15,7 @@ Coidentity
 Cozero
 Cocomposition
 RightCocomposition
-SequenceCompose
+Cosequence
 Held
 Argument
 
@@ -106,18 +106,18 @@ Verbatim[RightCocomposition][] := Coidentity
 
 
 (* ::Section:: *)
-(*SequenceCompose*)
+(*Cosequence*)
 
 
 (* Coidentity at the end should have no effect, but don't want it
    to disappear prematurely in the recursive definition below. *)
-SequenceCompose[fs___][xs__, Coidentity] := SequenceCompose[fs][xs]
+Cosequence[fs___][xs__, Coidentity] := Cosequence[fs][xs]
 
-SequenceCompose[f_, fs___][x_, xs___] := Sequence[f[x], SequenceCompose[fs][xs]]
+Cosequence[f_, fs___][x_, xs___] := Sequence[f[x], Cosequence[fs][xs]]
 
-SequenceCompose[fs__][] := fs
+Cosequence[fs__][] := fs
 
-SequenceCompose[][xs___] := xs
+Cosequence[][xs___] := xs
 
 
 (* ::Section:: *)
