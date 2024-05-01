@@ -17,6 +17,7 @@ Cocomposition
 RightCocomposition
 SequenceCompose
 Held
+Argument
 
 
 Begin["`Private`"];
@@ -153,6 +154,11 @@ Held /: expr : head_[left___, Held[mid_], right___] := With[{
 		If[holdRange[[1]] > 1, ;; holdRange[[1]] - 1, holdRange[[2]] + 1 ;;]
 	]
 ]
+
+
+(* ::Section:: *)
+(*Argument*)
+f_[Argument[x_, lvl : _Integer | {_Integer} | {_Integer, _Integer} | Infinity : {-1}, opts : OptionsPattern[Comap]]] ^:= Comap[f, x, lvl, opts]
 
 
 (* ::Section::Closed:: *)
