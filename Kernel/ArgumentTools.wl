@@ -14,6 +14,8 @@ BeginPackage["Wolfram`ArgumentTools`"];
 Coidentity
 Cozero
 Cocomposition
+Coconstruct
+Coapply
 RightCocomposition
 Cosequence
 Held
@@ -121,6 +123,30 @@ Cosequence[][xs___] := xs
 
 
 (* ::Section:: *)
+(*Coconstruct*)
+
+
+Coconstruct[x_, f_] := f[x]
+
+Coconstruct[x_, f_, fs__] := Sequence[f[x], Coconstruct[x, fs]]
+
+Coconstruct[x_][fs__] := Coconstruct[x, fs]
+
+Coconstruct[x_][] := x
+
+
+(* ::Section:: *)
+(*Coapply*)
+
+
+Options[Coapply] = Options[Apply]
+
+Coapply[x_, f_, lvl :  _Integer | {_Integer} | {_Integer, _Integer} | Infinity : {0}, opts : OptionsPattern[]] := Apply[f, x, lvl, opts]
+
+Coapply[x_][f_] := Apply[f, x]
+
+
+(* ::Section:: *)
 (*Held*)
 
 
@@ -158,7 +184,11 @@ Held /: expr : head_[left___, Held[mid_], right___] := With[{
 
 (* ::Section:: *)
 (*Argument*)
-f_[Argument[x_, lvl : _Integer | {_Integer} | {_Integer, _Integer} | Infinity : {-1}, opts : OptionsPattern[Comap]]] ^:= Comap[f, x, lvl, opts]
+
+
+Options[Argument] = Options[Comap]
+
+f_[Argument[x_, lvl : _Integer | {_Integer} | {_Integer, _Integer} | Infinity : {-1}, opts : OptionsPattern[]]] ^:= Comap[f, x, lvl, opts]
 
 
 (* ::Section::Closed:: *)
